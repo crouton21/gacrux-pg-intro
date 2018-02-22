@@ -3,6 +3,7 @@ const app = express();
 
 // Setup body parser to handle POST body
 const bodyParser = require('body-parser');
+app.use(bodyParser.json()); // NEEDED FOR ANGULARJS
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Setup songs router
