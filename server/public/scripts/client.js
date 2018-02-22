@@ -14,8 +14,10 @@ const songController = app.controller('SongController', ['$http', function($http
     })
     .then(function(response){
       console.log('Getting all songs:', response);
-      //self.formatDate();
       self.songArray = response.data;
+      for (song of response.data){
+        song.published = formatDate(song.published);
+      }
     })
     .catch(function(error){
       console.log(error);
@@ -54,19 +56,20 @@ const songController = app.controller('SongController', ['$http', function($http
   //   })
   // }
 
-  // function deleteSong(id){
-  //   $.ajax({
-  //     type: 'DELETE',
-  //     url: `songs/${id}`,
-  //   })
-  //   .done(function (response){
-  //     console.log('Deleted song');
-  //     getAllSongs();
-  //   })
-  //   .fail(function(error) {
-  //     console.log(error);
-  //   })
-  // }
+  self.deleteSong = function(id){
+    console.log('id in delete song', id);
+    $http({
+      method: 'DELETE',
+      url: `songs/${id}`,
+    })
+    .then(function (response){
+      console.log('Deleted song');
+      self.getAllSongs();
+    })
+    .catch(function(error) {
+      console.log(error);
+    })
+  }
 
   // function displaySongs(songs) {
   //   for (let song of songs) {
@@ -76,14 +79,14 @@ const songController = app.controller('SongController', ['$http', function($http
   //   }
   // }
 
-  // function formatDate(isoDateStr) {
-  //   let result = ''
-  //   if (isoDateStr != null) {
-  //     let date = new Date(isoDateStr);
-  //     result = date.toLocaleDateString();
-  //   }
-  //   return result;
-  // }
+  function formatDate(isoDateStr) {
+    let result = ''
+    if (isoDateStr != null) {
+      let date = new Date(isoDateStr);
+      result = date.toLocaleDateString();
+    }
+    return result;
+  }
 
   self.getAllSongs();
 }]);

@@ -7,6 +7,8 @@
   <title>Songs</title>
   <script src="vendors/angular.min.js"></script>
   <script src="scripts/client.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body ng-controller="SongController as vm">
   <h1>Songs!</h1>
@@ -22,13 +24,14 @@
   </section>
   <section>
     <h2>All the songs</h2>
-    <table>
-      <thead><tr><th>Track</th><th>Artist</th><th>Published</th><th>Rank</th></tr></thead>
+    <table class="table">
+      <thead><tr><th>Track</th><th>Artist</th><th>Published</th><th>Rank</th><th>Delete</th></tr></thead>
       <tbody ng-repeat="song in vm.songArray">
         <tr><td>{{song.track}}</td>
         <td>{{song.artist}}</td>
         <td>{{song.published}}</td>
-        <td>{{song.rank}}</td></tr>
+        <td>{{song.rank}}</td>
+        <td><button ng-click="vm.deleteSong(song.id)">Delete</button><button ng-click="vm.updateSongRating(song.id)">Edit</button></td></tr>
       </tbody>
     </table>
   </section>

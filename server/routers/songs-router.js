@@ -35,21 +35,21 @@ router.get('/', function(request, response){
 //     })
 // })
 
-// // Delete a single song from /songs/5, where 5 is the id
-// router.delete('/:id', (request, response) => {
-//   const id = request.params.id;
-//   const sqlText = 'DELETE FROM songs WHERE id=$1';
-//   pool.query(sqlText, [ id ])
-//     .then((result) => {
-//       console.log(`Deleted song ${id}`);
-//       response.sendStatus(200);
-//     })
-//     // bad things could happen...
-//     .catch(function(error){
-//       console.log(`Error on Delete song ${id}:`, error);
-//       response.sendStatus(500);
-//     })
-// })
+// Delete a single song from /songs/5, where 5 is the id
+router.delete('/:id', (request, response) => {
+  const id = request.params.id;
+  const sqlText = 'DELETE FROM songs WHERE id=$1';
+  pool.query(sqlText, [ id ])
+    .then((result) => {
+      console.log(`Deleted song ${id}`);
+      response.sendStatus(200);
+    })
+    // bad things could happen...
+    .catch(function(error){
+      console.log(`Error on Delete song ${id}:`, error);
+      response.sendStatus(500);
+    })
+})
 
 // // Update the rating of a specific song
 // router.put('/:id', (request, response) => {
